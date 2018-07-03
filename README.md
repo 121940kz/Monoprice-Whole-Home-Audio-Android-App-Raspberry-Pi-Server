@@ -1,12 +1,14 @@
 # Monoprice Whole Home Audio Android App Raspberry Pi Server
-For use with the Monoprice 6 zone 6 source OR Dayton Audio DAX66 amplifiers...This python script which turn your raspberry pi into a TCP server accepting connections from the [Monopice Whole Home Audio Android App by TheKMZ1 in the google play store](https://play.google.com/store/apps/details?id=com.monoprice.audiocontrol&hl=en_US). You will need a USB to Serial Cable plugged into your Pi/amp. 
+For use with the Monoprice 6 zone 6 source OR Dayton Audio DAX66 amplifiers...This python script which turn your Raspberry Pi into a TCP server accepting connections from the [Monopice Whole Home Audio Android App by TheKMZ1 in the google play store](https://play.google.com/store/apps/details?id=com.monoprice.audiocontrol&hl=en_US). 
+
+You will need a USB to Serial Cable plugged into your Pi/amp. 
 
 ## Prerequisite
-You need a raspberry pi (any model) that has a distribution of linux on it. I used [Raspbian](https://www.raspberrypi.org/downloads/raspbian/)
+You need a Raspberry Pi (any model) that has a distribution of linux on it. I used [Raspbian](https://www.raspberrypi.org/downloads/raspbian/)
 
-I am working under the assumption that you alreday have your raspberry pi setup and running, this is not a guide on how to install raspbian on your pi.
+I am working under the assumption that you alreday have your raspberry pi setup and running, this is not a guide on how to install raspbian on your Pi. You also need it on your local network, and static IP address is strongly recommended. You can either have your raspberry pi plugged in with an ethernet cable, or join it to your wireless network if you have Wi-Fi on your Pi. 
 
-Your raspberry pi needs python installed. By deault, Raspbian already has python installed, but in case you don't have it, install it by issuing this command `sudo apt-get install python3-picamera`
+Your Raspberry Pi needs python installed. By deault, Raspbian already has python installed, but in case you don't have it, install it by issuing this command `sudo apt-get install python3-picamera`
 
 ## Installation Steps
 1) Log in/SSH into your Raspberry Pi, and navigate to the `/bin` directory. Normally when you first SSH in, the command lineplaces you in the user folder, so issuing `cd ../../bin` will take you back 2 directories and into the bin folder. If it doesn't, then the easiest way is to just continue to issue `cd ..` until you cannot go back any more directories, and then finally issue `cd /bin`.
