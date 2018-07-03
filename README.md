@@ -10,7 +10,17 @@ I am working under the assumption that you alreday have your raspberry pi setup 
 
 Your Raspberry Pi needs python installed. By deault, Raspbian already has python installed, but in case you don't have it, install it by issuing this command `sudo apt-get install python3-picamera`
 
-## Installation Steps
+## Quick Install Steps
+1) Navigate to `/bin` directory on the Pi
+2) Use `wget ` to download the python server file into that directory
+3) Navigate to `/etc` directory
+4) Edit the `rc.local` file
+5) At the bottom before exit 0, add `python ../bin/MonopriceAudioPythonServer.py &`
+6) Save the file
+7) Reboot the Pi to see if the server is up and running and that the android app works
+7b) If it doesn't work, refer to the troubleshooting steps
+
+## Detailed Install Steps
 1) Log in/SSH into your Raspberry Pi, and navigate to the `/bin` directory. Normally when you first SSH in, the command lineplaces you in the user folder, so issuing `cd ../../bin` will take you back 2 directories and into the bin folder. If it doesn't, then the easiest way is to just continue to issue `cd ..` until you cannot go back any more directories, and then finally issue `cd /bin`.
 
 2) Once you are in the `/bin` directory, issue the command to download the python file into that folder `wget `
