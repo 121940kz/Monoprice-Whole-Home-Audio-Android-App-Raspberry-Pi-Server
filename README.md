@@ -17,7 +17,7 @@ Your Raspberry Pi needs python installed. By deault, Raspbian already has python
 4) Edit the `rc.local` file
 5) At the bottom before exit 0, add `python ../bin/MonopriceAudioPythonServer.py &`
 6) Save the file
-7) Reboot the Pi to see if the server is up and running and that the android app works
+7) Reboot the Pi to see if the server is up and running and that the android app works `sudo reboot`
 8) If it doesn't work, refer to the troubleshooting steps
 
 ## Detailed Install Steps
