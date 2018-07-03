@@ -31,6 +31,8 @@ Your Raspberry Pi needs python installed. By deault, Raspbian already has python
 
 ## Troubleshooting If Not Working
 
-#### All the steps worked but the android app doesn't work
+#### All the steps worked but the android app doesn't work / isn't connecting to it
 If you performed all the steps and the app isn't working, it is best to comment out the the line in the `rc.local` file that was added in step 4, and try to run the python file manually.  
+
+#### Some of the steps above failed
 
