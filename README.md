@@ -12,7 +12,7 @@ Your Raspberry Pi needs python installed. By deault, Raspbian already has python
 
 ## Quick Install Steps
 1) Navigate to `/bin` directory on the Pi
-2) Use `wget ` to download the python server file into that directory
+2) Use `wget https://github.com/121940kz/Monoprice-Whole-Home-Audio-Android-App-Raspberry-Pi-Server/raw/master/MonopriceAudioPythonServer.py` to download the python server file into that directory
 3) Navigate to `/etc` directory
 4) Edit the `rc.local` file
 5) At the bottom before exit 0, add `python ../bin/MonopriceAudioPythonServer.py &`
@@ -23,7 +23,7 @@ Your Raspberry Pi needs python installed. By deault, Raspbian already has python
 ## Detailed Install Steps
 1) Log in/SSH into your Raspberry Pi, and navigate to the `/bin` directory. Normally when you first SSH in, the command lineplaces you in the user folder, so issuing `cd ../../bin` will take you back 2 directories and into the bin folder. If it doesn't, then the easiest way is to just continue to issue `cd ..` until you cannot go back any more directories, and then finally issue `cd /bin`.
 
-2) Once you are in the `/bin` directory, issue the command to download the python file into that folder `wget `
+2) Once you are in the `/bin` directory, issue the command to download the python file into that folder `wget https://github.com/121940kz/Monoprice-Whole-Home-Audio-Android-App-Raspberry-Pi-Server/raw/master/MonopriceAudioPythonServer.py`
 
 3) We want this server to always be running, so in the event the Raspberry Pi reboots, we want it to automatically start up again. Inside of the `/etc` folder edit the rc.local file by typing `sudo nano rc.local`
 
