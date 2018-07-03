@@ -9,9 +9,9 @@ I am working under the assumption that you alreday have your raspberry pi setup 
 Your raspberry pi needs python installed. By deault, Raspbian already has python installed, but in case you don't have it, install it by issuing this command `sudo apt-get install python3-picamera`
 
 ## Installation Steps
-1) Log in/SSH into your Raspberry Pi, and navigate to `/bin` normally at the command line you are in the user folder, so issuing `cd ../../bin` will take you back 2 directories and into the bin folder
+1) Log in/SSH into your Raspberry Pi, and navigate to the `/bin` directory. Normally when you first SSH in, the command lineplaces you in the user folder, so issuing `cd ../../bin` will take you back 2 directories and into the bin folder. If it doesn't, then the easiest way is to just continue to issue `cd ..` until you cannot go back any more directories, and then finally issue `cd /bin`.
 
-2) Once you are in `/bin` issue the command to download the python file `wget `
+2) Once you are in the `/bin` directory, issue the command to download the python file into that folder `wget `
 
 3) We want this server to always be running, so in the event the Raspberry Pi reboots, we want it to automatically start up again. Inside of the `/etc` folder edit the rc.local file by typing `sudo nano rc.local`
 
