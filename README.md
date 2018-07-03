@@ -9,7 +9,7 @@ I am working under the assumption that you alreday have your raspberry pi setup 
 Your raspberry pi needs python installed. By deault, Raspbian already has python installed, but in case you don't have it, install it by issuing this command `sudo apt-get install python3-picamera`
 
 ## Installation Steps
-1) Log into your Raspberry Pi, and navigate to `/bin` normally at the command line you are in the user folder, so issuing `cd ../../bin` will take you back 2 directories and into the bin folder
+1) Log in/SSH into your Raspberry Pi, and navigate to `/bin` normally at the command line you are in the user folder, so issuing `cd ../../bin` will take you back 2 directories and into the bin folder
 
 2) Once you are in `/bin` issue the command to download the python file `wget `
 
