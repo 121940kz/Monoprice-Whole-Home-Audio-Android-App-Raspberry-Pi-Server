@@ -46,7 +46,8 @@ while 1:
             ser.xonxoff = False #disable software flow control
             ser.rtscts = False #disable hardware RTS/CTS flow control
             ser.dsrdtr = False #disable hardware DSR/DTR flow control
-            ser.open()
+            if(ser.isOpen() == False)
+                ser.open()
             ser.flushInput()
             ser.flushOutput()
             ser.write(data)
@@ -66,3 +67,4 @@ while 1:
     finally:
         #Always close the current connection so we can wait for another
         conn.close()
+        ser.close()
