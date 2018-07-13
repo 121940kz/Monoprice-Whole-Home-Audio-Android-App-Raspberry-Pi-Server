@@ -1,4 +1,4 @@
-# !/usr/bin/env python
+#!/usr/bin/env python
 import socket
 import logging
 import serial
@@ -46,7 +46,7 @@ while 1:
             ser.xonxoff = False #disable software flow control
             ser.rtscts = False #disable hardware RTS/CTS flow control
             ser.dsrdtr = False #disable hardware DSR/DTR flow control
-            if(ser.isOpen() == False)
+            if(ser.isOpen() == False):
                 ser.open()
             ser.flushInput()
             ser.flushOutput()
