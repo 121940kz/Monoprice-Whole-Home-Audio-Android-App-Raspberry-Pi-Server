@@ -4,7 +4,7 @@ import logging
 import serial
 
 #TCP Server (socket) Settings
-TCP_IP = '172.16.186.225' #Configure this with YOUR Raspberry Pi IP Address
+TCP_IP = '0.0.0.0' #Listen on all Raspberry Pi IP Addresses.
 TCP_PORT = 4999 #Optionally you can set your own port number. 4999 is what the iTach flex uses, if you change this you NEED to change it in the android app settings
 BUFFER_SIZE = 16  # Normally 1024, but we want fast response and dont need 1024 bytes
 
