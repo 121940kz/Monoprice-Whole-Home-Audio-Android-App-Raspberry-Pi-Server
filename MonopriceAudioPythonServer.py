@@ -14,7 +14,7 @@ s.bind((TCP_IP, TCP_PORT))
 s.listen(1)
 
 #Logging settings
-logging.basicConfig(format='%(asctime)s %(message)s', filename='/home/pi/MonopriceAudioServer.log')
+#logging.basicConfig(format='%(asctime)s %(message)s', filename='/home/pi/MonopriceAudioServer.log')
 
 #We want this loop to run forever, so it will always be ready to accept a connection
 while 1:
@@ -54,13 +54,13 @@ while 1:
             response = ser.read(256) #read 256 bytes or until the ser.timeout value is reached (it will always be the timeout)
             #SENDING COMPLETE - SEND BACK DATA RESPONSE THAT WAS RETURNED FROM SERIAL CONNECTION
 
-            # Send data back to the connected client
-            conn.send(data)
+            # Send the serial response back to the connected client
+            conn.send(response)
 
     except Exception as e:
         #Log the error so we could go back and see what might have happened
-        logging.error(e.__doc__)
-        logging.error(e.message)
+        #logging.error(e.__doc__)
+        #logging.error(e.message)
 
         #Continue with the loop to accept connections if an error occurs
         continue
