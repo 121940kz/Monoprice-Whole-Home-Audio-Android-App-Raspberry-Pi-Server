@@ -2,6 +2,7 @@
 import socket
 import logging
 import serial
+import sys
 
 #TCP Server (socket) Settings
 TCP_IP = '0.0.0.0' #Listen on all Raspberry Pi IP Addresses.
@@ -56,6 +57,10 @@ while 1:
 
             # Send the serial response back to the connected client
             conn.send(response)
+
+    except KeyboardInterrupt:
+        print("Exiting...")
+        sys.exit(0)
 
     except Exception as e:
         #Log the error so we could go back and see what might have happened
