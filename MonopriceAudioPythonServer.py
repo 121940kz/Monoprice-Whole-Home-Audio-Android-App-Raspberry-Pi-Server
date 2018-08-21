@@ -14,6 +14,19 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((TCP_IP, TCP_PORT))
 s.listen(1)
 
+# Serial Settings - configured just like we would if we had the iTach Flex
+ser = serial.Serial()
+ser.port = '/dev/ttyUSB0'
+ser.baudrate = 9600
+ser.timeout = .1 #this is the read timeout
+ser.writeTimeout = 2
+ser.bytesize = serial.EIGHTBITS
+ser.parity = serial.PARITY_NONE
+ser.stopbits = serial.STOPBITS_ONE
+ser.xonxoff = False #disable software flow control
+ser.rtscts = False #disable hardware RTS/CTS flow control
+ser.dsrdtr = False #disable hardware DSR/DTR flow control
+
 #Logging settings
 #logging.basicConfig(format='%(asctime)s %(message)s', filename='/home/pi/MonopriceAudioServer.log')
 
@@ -35,18 +48,6 @@ while 1:
             #print("received data:", data)
 
             #WE HAVE THE DATA RECEIVED, NOW SEND IT OVER THE SERIAL CONNECTION
-            # Serial Settings - configured just like we would if we had the iTach Flex
-            ser = serial.Serial()
-            ser.port = '/dev/ttyUSB0'
-            ser.baudrate = 9600
-            ser.timeout = .1 #this is the read timeout
-            ser.writeTimeout = 2
-            ser.bytesize = serial.EIGHTBITS
-            ser.parity = serial.PARITY_NONE
-            ser.stopbits = serial.STOPBITS_ONE
-            ser.xonxoff = False #disable software flow control
-            ser.rtscts = False #disable hardware RTS/CTS flow control
-            ser.dsrdtr = False #disable hardware DSR/DTR flow control
             if(ser.isOpen() == False):
                 ser.open()
             ser.flushInput()
