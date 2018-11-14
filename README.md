@@ -8,7 +8,11 @@ You need a Raspberry Pi (any model) that has a distribution of linux on it. I us
 
 I am working under the assumption that you alreday have your Raspberry Pi setup and running, this is not a guide on how to install raspbian on your Pi. You also need it connected to your local network, and static IP address is strongly recommended. You can either have your raspberry pi plugged in with an ethernet cable, or join it to your wireless network if you have Wi-Fi on your Pi. 
 
-Your Raspberry Pi needs python installed. By deault, Raspbian already has python installed, but in case you don't have it, install it by issuing this command `sudo apt-get install python3-picamera`
+Your Raspberry Pi needs python installed. By deault, Raspbian already has python installed, but in case you don't have it, install it by issuing this command below. Also there are depedencies needed such as pySerial so install that as well (version 2.x is needed).
+`sudo apt-get update`
+`sudo apt-get install python3-picamera`
+`sudo apt-get install python-pip`
+`sudo pip install "pySerial>=2.0,<=2.9999"`
 
 ## Quick Install Steps
 1) Navigate to `/bin` directory on the Pi
