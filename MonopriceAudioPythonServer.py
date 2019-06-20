@@ -18,7 +18,7 @@ s.listen(1)
 ser = serial.Serial()
 ser.port = '/dev/ttyUSB0'
 ser.baudrate = 9600
-ser.timeout = .1 #this is the read timeout
+ser.timeout = .2 #this is the read timeout
 ser.writeTimeout = 2
 ser.bytesize = serial.EIGHTBITS
 ser.parity = serial.PARITY_NONE
