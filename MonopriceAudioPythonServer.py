@@ -3,16 +3,17 @@ import socket
 import logging
 import serial
 import sys
+import threading
 
 #TCP Server (socket) Settings
 TCP_IP = '0.0.0.0' #Listen on all Raspberry Pi IP Addresses.
 TCP_PORT = 4999 #Optionally you can set your own port number. 4999 is what the iTach flex uses, if you change this you NEED to change it in the android app settings
 BUFFER_SIZE = 16  # Normally 1024, but we want fast response and dont need 1024 bytes
 
-#Socket Settings
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((TCP_IP, TCP_PORT))
-s.listen(1)
+# Initialize Socket
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind((TCP_IP, TCP_PORT))
+server_socket.listen(5)  # Allows up to 5 simultaneous connections in the backlog
 
 # Serial Settings - configured just like we would if we had the iTach Flex
 ser = serial.Serial()
@@ -30,47 +31,64 @@ ser.dsrdtr = False #disable hardware DSR/DTR flow control
 #Logging settings
 #logging.basicConfig(format='%(asctime)s %(message)s', filename='/home/pi/MonopriceAudioServer.log')
 
-#We want this loop to run forever, so it will always be ready to accept a connection
-while 1:
+# Create a lock for the serial port
+serial_lock = threading.Lock()
+
+# Function to handle client connections
+def handle_client(conn, addr):
+    #print(f'Connection from address: {addr}')
+    
+    # Set a timeout for idle clients
+    conn.settimeout(86400)  # Timeout after 86400 seconds (1 day) of inactivity
+
     try:
-        #Wait for a connection to come through from a client (A.K.A the monoprice android app)
-        conn, addr = s.accept()
+        while True:
+            try:
+                data = conn.recv(BUFFER_SIZE)
+                if not data: 
+                    break
 
-        #print('Connection from address:', addr)
+                print("Received data:", data)
 
-        while 1:
+                # Ensure safe access to the serial port
+                with serial_lock:
+                    if not ser.is_open:
+                        ser.open()
 
-            data = conn.recv(BUFFER_SIZE)
+                    ser.flushInput()
+                    ser.flushOutput()
+                    ser.write(data)
+                    response = ser.read(256)  # Read up to 256 bytes or until timeout
 
-            #If data received is an emtpy string, then break out of this inner loop and wait for another connection
-            if not data: break
+                # Send the serial response back to the client
+                conn.send(response)
 
-            #print("received data:", data)
-
-            #WE HAVE THE DATA RECEIVED, NOW SEND IT OVER THE SERIAL CONNECTION
-            if(ser.isOpen() == False):
-                ser.open()
-            ser.flushInput()
-            ser.flushOutput()
-            ser.write(data)
-            response = ser.read(256) #read 256 bytes or until the ser.timeout value is reached (it will always be the timeout)
-            #SENDING COMPLETE - SEND BACK DATA RESPONSE THAT WAS RETURNED FROM SERIAL CONNECTION
-
-            # Send the serial response back to the connected client
-            conn.send(response)
-
-    except KeyboardInterrupt:
-        print("Exiting...")
-        sys.exit(0)
+            except socket.timeout:
+                print(f"Client at {addr} timed out due to inactivity.")
+                break
 
     except Exception as e:
-        #Log the error so we could go back and see what might have happened
-        #logging.error(e.__doc__)
-        #logging.error(e.message)
+#       logging.error("Exception occurred", exc_info=True)
+        print("Error:", str(e))
 
-        #Continue with the loop to accept connections if an error occurs
-        continue
     finally:
-        #Always close the current connection so we can wait for another
         conn.close()
+        print(f"Connection closed for {addr}")
+
+# Main loop to accept multiple connections
+try:
+    while True:
+        conn, addr = server_socket.accept()
+        # Create a new thread for each client connection
+        client_thread = threading.Thread(target=handle_client, args=(conn, addr))
+        client_thread.daemon = True  # Daemon threads exit when the main program exits
+        client_thread.start()
+
+except KeyboardInterrupt:
+    print("Exiting...")
+    sys.exit(0)
+
+finally:
+    server_socket.close()
+    if ser.is_open:
         ser.close()
